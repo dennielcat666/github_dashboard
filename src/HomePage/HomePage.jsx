@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import SearchRep from '../SearchRep/SearchRep'
+import SearchRepositories from '../SearchRepositories/SearchRepositories'
 import Button from '../Button/Button'
 // import RepCard from '../RepCard/RepCard'
-import RepList from '../RepList/RepList'
+import RepositoriesList from '../RepositoriesList/RepositoriesList'
 
 class HomePage extends Component{
 	state = {
@@ -16,10 +16,9 @@ class HomePage extends Component{
 	render(){
 		return (
 			<div>
-				<SearchRep value={this.state.search} onChange={this.handleChange}/>
+				<SearchRepositories value={this.state.search} onChange={this.handleChange}/>
 				<Button>Поиск</Button>
-				{/* <RepCard/> */}
-				<RepList/>
+				<RepositoriesList/>
 			</div>
 		)
 	}

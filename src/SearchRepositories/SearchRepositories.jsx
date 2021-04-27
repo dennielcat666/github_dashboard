@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class SearchRep extends Component{
+class SearchRepositories extends Component{
 	render(){
 		const {value, onChange} = this.props
 		return (
@@ -9,4 +9,4 @@ class SearchRep extends Component{
 	}
 }
 
-export default SearchRep
+export default SearchRepositories

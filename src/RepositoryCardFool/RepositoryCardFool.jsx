@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class RepCard extends Component{
+class RepositoryCardFool extends Component{
 
 	render(){
 		return (
@@ -22,4 +22,4 @@ class RepCard extends Component{
 	}
 }
 
-export default RepCard
+export default RepositoryCardFool
