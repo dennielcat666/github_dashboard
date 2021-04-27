@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import RepositoryCardFool from '../RepositoryCardFool/RepositoryCardFool'
 import RepositoryCardShort from '../RepositoryCardShort/RepositoryCardShort'
-import getRepositories from '../api'
+import {getRepositoriesList} from '../api'
 
 class RepositoriesList extends Component{
 
@@ -14,7 +14,7 @@ class RepositoriesList extends Component{
 	// gitHubLink: item.html_url
 
 	componentDidMount(){
-		getRepositories()
+		getRepositoriesList()
 			.then(res => {
 				const repositoriesArr = res.map(item => ({
 					repositoryName: item.name,
