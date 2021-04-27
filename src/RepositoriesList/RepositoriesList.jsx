@@ -21,6 +21,7 @@ class RepositoriesList extends Component{
 					repositoryStars: item.stargazers_count,
 					lastCommit: item.updated_at,
 					gitHubLink: item.html_url,
+					fullName: item.full_name,
 					// avatarOwner: item.owner.avatar_url,
 					// nickName: 'jfhffjf',
 					// ownerLink: 'kfnffhff',
@@ -44,6 +45,7 @@ class RepositoriesList extends Component{
 							repositoryStars={item.repositoryStars}
 							lastCommit={item.lastCommit}
 							gitHubLink={item.gitHubLink}
+							fullName={item.fullName}
 						/>
 					)
 				})}
