@@ -13,12 +13,14 @@ class RepositoryCardFool extends Component{
 		languages: "Список используемых языков в репозитории",
 		description: "Краткое описание репозитория",
 		contributors: "10 наиболее активных контрибьютеров",
+		isError: false
 	}
 
 	componentDidMount(){
 		const {owner, name} = this.props.match.params
 		getRepository(owner, name)
 			.then(res => {
+				console.log('res', res);
 				this.setState({
 					repositoryName: res.name,
 					repositoryStars: res.stargazers_count,
@@ -31,10 +33,19 @@ class RepositoryCardFool extends Component{
 					// contributors: "10 наиболее активных контрибьютеров",
 				})
 			})
+			.catch(error => {
+				console.error('Ошибка: ', error)
+				this.setState({isError: true})
+			})
 	}
 
 	render(){
-		console.log('props', this.props);
+		// console.log('props', this.props);
+		if(this.state.isError){
+			return (
+				<div>Упс {'>_<'}</div>
+			)
+		}
 		return (
 			<div>
 				<h2>{this.state.repositoryName}</h2>

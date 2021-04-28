@@ -6,12 +6,9 @@ import {getRepositoriesList} from '../api'
 class RepositoriesList extends Component{
 
 	state = {
-		repositories: []
+		repositories: [],
+		isError: false
 	}
-
-	// repositoryStars:,
-	// lastCommit:,
-	// gitHubLink: item.html_url
 
 	componentDidMount(){
 		getRepositoriesList()
@@ -22,19 +19,22 @@ class RepositoriesList extends Component{
 					lastCommit: item.updated_at,
 					gitHubLink: item.html_url,
 					fullName: item.full_name,
-					// avatarOwner: item.owner.avatar_url,
-					// nickName: 'jfhffjf',
-					// ownerLink: 'kfnffhff',
-					// languages: item.languages_url,
-					// description: item.description,
-					// contributors: item.contributors_url
 				}))
 
 				this.setState({repositories: repositoriesArr})
 			})
+			.catch(error => {
+				console.error('Ошибка: ', error)
+				this.setState({isError: true})
+			})
 	}
 
 	render(){
+		if(this.state.isError){
+			return (
+				<div>Упс {'>_<'}</div>
+			)
+		}
 		return (
 			<div>
 				{this.state.repositories.map(item => {

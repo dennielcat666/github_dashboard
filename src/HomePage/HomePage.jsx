@@ -14,6 +14,7 @@ class HomePage extends Component{
 	}
 
 	render(){
+		
 		return (
 			<div>
 				<SearchRepositories value={this.state.search} onChange={this.handleChange}/>

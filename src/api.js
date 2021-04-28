@@ -1,25 +1,23 @@
-// const apiRepositories = "https://api.github.com/repositories"
-
-// function getRepositories() {
-// 	return fetch(apiRepositories)
-// 			.then(res => res.json())
-// 			.catch(error => console.error(error))
-// }
-
-// export default getRepositories
-
 const apiRepositories = "https://api.github.com/orgs/facebook/repos"
 
 export function getRepositoriesList() {
 	return fetch(apiRepositories)
 			.then(res => res.json())
-			.catch(error => console.error(error))
 }
 
 const apiRepository = "https://api.github.com/repos/"
 
 export function getRepository(owner, name) {
-	return fetch(`${apiRepository}${owner}/${name}`)
-		.then(res => res.json())
-		.catch(error => console.error(error))
+	return Promise.all([
+		fetch(`${apiRepository}${owner}/${name}`),
+		fetch(`${apiRepository}${owner}/${name}/languages`),
+		fetch(`${apiRepository}${owner}/${name}/contributors`)
+	])
+	.then(res => Promise.all(res.map(item => item.json())))
+	.then(res => ({
+		...res[0],
+		languages: res[1],
+		contributors: res[2]
+	}))
 }
+
