@@ -4,15 +4,15 @@ import {getRepository} from '../api'
 class RepositoryCardFool extends Component{
 
 	state = {
-		repositoryName: "Заголовок",
-		repositoryStars: "Звездячки",
-		lastCommit: "Дата последнего коммита",
-		avatarOwner: "Фото владельца репозитория, если есть",
-		nickName: "Nickname владельца репозитория с ссылкой на него",
-		ownerLink: "ссылка",
-		languages: "Список используемых языков в репозитории",
-		description: "Краткое описание репозитория",
-		contributors: "10 наиболее активных контрибьютеров",
+		repositoryName: "",
+		repositoryStars: "",
+		lastCommit: "",
+		avatarOwner: "",
+		nickName: "",
+		ownerLink: "",
+		languages: [],
+		description: "",
+		contributors: [],
 		isError: false
 	}
 
@@ -28,9 +28,9 @@ class RepositoryCardFool extends Component{
 					avatarOwner: res.owner.avatar_url,
 					nickName: res.owner.login,
 					ownerLink: res.owner.html_url,
-					// languages: "Список используемых языков в репозитории",
+					languages: res.languages,
 					description: res.description,
-					// contributors: "10 наиболее активных контрибьютеров",
+					contributors: res.contributors.slice(0, 10),
 				})
 			})
 			.catch(error => {
@@ -54,11 +54,15 @@ class RepositoryCardFool extends Component{
 				<img src={this.state.avatarOwner} />
 				<a target='_blank' href={this.state.ownerLink}>{this.state.nickName}</a>
 				<ul>
-					<li>Список используемых языков в репозитории</li>
+					{Object.entries(this.state.languages).map(([key, value]) => {
+						return <li key={key}>{key}: {value}</li>
+					})}
 				</ul>
 				<div>{this.state.description}</div>
 				<ul>
-					<li>10 наиболее активных контрибьютеров</li>
+					{this.state.contributors.map(item => {
+						return <li key={item.id}><a target='_blank' href={item.html_url}><img src={item.avatar_url} />{item.login}</a></li>
+					})}
 				</ul>
 			</div>
 		)
