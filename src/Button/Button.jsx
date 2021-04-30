@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
+import cn from 'classnames'
+
+import styles from './Button.module.css';
 
 class Button extends Component{
 
 	render(){
-		const {children} = this.props
+		const {children, className} = this.props
 		return (
-			<button>{children}</button>
+			<button className={cn(styles.btn, className)}>{children}</button>
 		)
 	}
 }

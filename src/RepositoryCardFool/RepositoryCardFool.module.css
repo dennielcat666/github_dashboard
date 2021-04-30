@@ -1,0 +1,67 @@
+.cardFool {
+	background-color: #fff;
+	margin: 0 auto;
+	max-width: 700px;
+	width: 100%;
+	padding: 20px 20px;
+}
+
+.cardFoolName {
+	font-size: 35px;
+	color: #0366d6;
+}
+
+.cardOwner {
+	display: flex;
+	align-items: center;
+	margin: 20px 0px;
+}
+
+.avatarOwner {
+	max-width: 100px;
+	width: 100%;
+}
+
+.ownerLink {
+	display: inline-block;
+	margin: 0px 10px;
+	font-size: 25px;
+	text-decoration: none;
+	color: #000;
+}
+
+.ownerLink:hover {
+	text-decoration: underline;
+}
+
+.headerList {
+	color: #000;
+	font-size: 20px;
+}
+
+.contributorsList {
+	display: flex;
+}
+
+.contributorsListItem {
+	display: flex;
+	align-items: stretch;
+	list-style: none;
+	height: 60px;
+	padding: 10px 0px;
+}
+
+.avatarContributors {
+	border-radius: 50%;
+	max-width: 50px;
+	width: 100%;
+}
+
+.avatarContributors:hover {
+	max-width: 60px;
+	width: 100%;
+}
+
+.avatarContributorsLink {
+	display: inline-block;
+}

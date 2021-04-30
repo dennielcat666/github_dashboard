@@ -1,0 +1,10 @@
+.reposList {
+	margin: 10px 0px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.searchLink {
+	margin: 15px 20px;
+}

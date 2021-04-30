@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-// import RepositoryCardFool from '../RepositoryCardFool/RepositoryCardFool'
+import {Link} from "react-router-dom";
 import RepositoryCardShort from '../RepositoryCardShort/RepositoryCardShort'
+import Button from '../Button/Button'
 import {getRepositoriesList} from '../api'
+
+import styles from './RepositoriesList.module.css';
 
 class RepositoriesList extends Component{
 
@@ -37,7 +40,9 @@ class RepositoriesList extends Component{
 		}
 		return (
 			<div>
-				{this.state.repositories.map(item => {
+				<Link to={'/search'}><Button className={styles.searchLink}>Поиск</Button></Link>
+				<div className={styles.reposList}>
+					{this.state.repositories.map(item => {
 					return (
 						<RepositoryCardShort 
 							key={item.repositoryName}
@@ -48,8 +53,10 @@ class RepositoriesList extends Component{
 							fullName={item.fullName}
 						/>
 					)
-				})}
+					})}
+				</div>
 			</div>
+			
 		)
 	}
 }

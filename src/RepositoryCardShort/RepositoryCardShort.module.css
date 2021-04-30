@@ -1,0 +1,30 @@
+.cardShort {
+	margin: 10px 10px;
+	border: 1px solid #cecece;
+	border-radius: 15px;
+	padding: 15px;
+	max-width: 232px;
+	width: 100%;
+	background-color: #fff;
+}
+
+.nameLink {
+	text-decoration: none;
+	font-size: 20px;
+	color: #0366d6;
+}
+
+.nameLink:hover {
+	text-decoration: underline;
+}
+
+.gitHubLink {
+	text-decoration: none;
+	font-size: 20px;
+	color: #40c463;
+}
+
+.gitHubLink:hover {
+	color: #30a14e;
+	text-decoration: underline;
+}

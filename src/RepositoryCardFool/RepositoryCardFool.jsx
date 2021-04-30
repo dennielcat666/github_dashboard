@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {getRepository} from '../api'
 
+import styles from './RepositoryCardFool.module.css'
+
 class RepositoryCardFool extends Component{
 
 	state = {
@@ -40,30 +42,44 @@ class RepositoryCardFool extends Component{
 	}
 
 	render(){
-		// console.log('props', this.props);
 		if(this.state.isError){
 			return (
 				<div>Упс {'>_<'}</div>
 			)
 		}
 		return (
-			<div>
-				<h2>{this.state.repositoryName}</h2>
-				<div>{this.state.repositoryStars}</div>
+			<div className={styles.cardFool}>
+				<h2 className={styles.cardFoolName}>{this.state.repositoryName}</h2>
+				<div>Stars: {this.state.repositoryStars}</div>
 				<div>{this.state.lastCommit}</div>
-				<img src={this.state.avatarOwner} />
-				<a target='_blank' href={this.state.ownerLink}>{this.state.nickName}</a>
-				<ul>
-					{Object.entries(this.state.languages).map(([key, value]) => {
-						return <li key={key}>{key}: {value}</li>
-					})}
-				</ul>
-				<div>{this.state.description}</div>
-				<ul>
-					{this.state.contributors.map(item => {
-						return <li key={item.id}><a target='_blank' href={item.html_url}><img src={item.avatar_url} />{item.login}</a></li>
-					})}
-				</ul>
+				<div className={styles.cardOwner}>
+					<img src={this.state.avatarOwner} className={styles.avatarOwner} />
+					<a target='_blank' href={this.state.ownerLink} className={styles.ownerLink}>{this.state.nickName}</a>
+				</div>
+				<div>
+					<p className={styles.headerList}>Используемые языки:</p>
+					<ul>
+						{Object.entries(this.state.languages).map(([key, value]) => {
+							return <li key={key}>{key}: {value}</li>
+						})}
+					</ul>
+				</div>
+				<div>Описание: {this.state.description}</div>
+				<div>
+					<p className={styles.headerList}>10 наиболее активных контрибьютеров: </p>
+					<ul className={styles.contributorsList}>
+						{this.state.contributors.map(item => {
+							return (
+								<li key={item.id} className={styles.contributorsListItem}>
+									<a target='_blank' href={item.html_url} className={styles.avatarContributorsLink}>
+										<img className={styles.avatarContributors} src={item.avatar_url} />
+										{item.login}
+									</a>
+								</li>
+							)
+						})}
+					</ul>
+				</div>
 			</div>
 		)
 	}
