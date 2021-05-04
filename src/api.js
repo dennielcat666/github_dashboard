@@ -23,8 +23,8 @@ export function getRepository(owner, name) {
 
 const apiForSearch = "https://api.github.com/search/repositories"
 
-export function searchRepository(q) {
-	return fetch(`${apiForSearch}?q=${q}`)
+export function searchRepository(q, page = 1, perPage = 10) {
+	return fetch(`${apiForSearch}?q=${q}&page=${page}&per_page=${perPage}`)
 		.then(res => res.json())
 }
 

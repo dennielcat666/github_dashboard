@@ -1,25 +1,32 @@
 import React, { Component } from 'react'
 import Button from '../Button/Button'
 import RepositoryCardShort from '../RepositoryCardShort/RepositoryCardShort'
+import ReactPaginate from 'react-paginate'
 import {searchRepository} from '../api'
 
 import styles from './SearchRepositories.module.css';
+
+const PER_PAGE = 10
 
 class SearchRepositories extends Component{
 	state = {
 		repositories: [],
 		search: '',
-		isError: false
+		isError: false,
+		pageCount: 0
 	}
 
 	handleChange = (e) => {
 		this.setState({search: e.target.value})
 	}
 
-	handleClick = () => {
+	handleClick = (page) => {
+		console.log('page', page);
 		const {search} = this.state
-		searchRepository(search)
+		const pageCheck = page.selected ? page.selected : 0
+		searchRepository(search, pageCheck, PER_PAGE)
 		.then(res => {
+			console.log('search', res);
 			const repositoriesArr = res.items.map(item => ({
 				repositoryID: item.id,
 				repositoryName: item.name,
@@ -28,7 +35,7 @@ class SearchRepositories extends Component{
 				gitHubLink: item.html_url,
 				fullName: item.full_name,
 			}))
-			this.setState({repositories: repositoriesArr});
+			this.setState({repositories: repositoriesArr, pageCount: Math.floor(res.total_count/PER_PAGE)});
 		}) 
 		.catch(error => {
 			console.error('Ошибка: ', error)
@@ -62,6 +69,12 @@ class SearchRepositories extends Component{
 						)
 					})}
 				</div>
+				{(this.state.repositories.length >= 1) ? <ReactPaginate
+												pageCount={this.state.pageCount}
+												pageRangeDisplayed={9}
+												marginPagesDisplayed={1}
+												onPageChange={this.handleClick}
+											/> : null}
 			</div>
 			
 		)
