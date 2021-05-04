@@ -6,9 +6,9 @@ import styles from './Button.module.css';
 class Button extends Component{
 
 	render(){
-		const {children, className} = this.props
+		const {children, className, onClick} = this.props
 		return (
-			<button className={cn(styles.btn, className)}>{children}</button>
+			<button className={cn(styles.btn, className)} onClick={onClick}>{children}</button>
 		)
 	}
 }
