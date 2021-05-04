@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Button from '../Button/Button'
 import RepositoryCardShort from '../RepositoryCardShort/RepositoryCardShort'
+import Oops from '../Oops/Oops'
 import ReactPaginate from 'react-paginate'
 import {searchRepository} from '../api'
 
@@ -21,12 +22,15 @@ class SearchRepositories extends Component{
 	}
 
 	handleClick = (page) => {
-		console.log('page', page);
 		const {search} = this.state
 		const pageCheck = page.selected ? page.selected : 0
+		console.log('page', page);
+		console.log('pageCheck', pageCheck);
 		searchRepository(search, pageCheck, PER_PAGE)
 		.then(res => {
-			console.log('search', res);
+			if(!res.items) {
+				throw new Error(res.message);
+			}
 			const repositoriesArr = res.items.map(item => ({
 				repositoryID: item.id,
 				repositoryName: item.name,
@@ -44,37 +48,36 @@ class SearchRepositories extends Component{
 	}
 
 	render(){
-		if(this.state.isError){
-			return (
-				<div>Упс {'>_<'}</div>
-			)
-		}
 		return (
 			<div>
 				<div className={styles.searchForm}>
 					<input type="text" value={this.state.search} onChange={this.handleChange}/>
 					<Button onClick={this.handleClick}>Поиск</Button>
 				</div>
-				<div className={styles.searchList}>
-					{this.state.repositories.map(item => {
-						return (
-							<RepositoryCardShort 
-								key={item.repositoryID}
-								repositoryName={item.repositoryName}
-								repositoryStars={item.repositoryStars}
-								lastCommit={item.lastCommit}
-								gitHubLink={item.gitHubLink}
-								fullName={item.fullName}
-							/>
-						)
-					})}
-				</div>
-				{(this.state.repositories.length >= 1) ? <ReactPaginate
-												pageCount={this.state.pageCount}
-												pageRangeDisplayed={9}
-												marginPagesDisplayed={1}
-												onPageChange={this.handleClick}
-											/> : null}
+				{this.state.isError ? <Oops/> : (
+					<>
+						<div className={styles.searchList}>
+							{this.state.repositories.map(item => {
+								return (
+									<RepositoryCardShort 
+										key={item.repositoryID}
+										repositoryName={item.repositoryName}
+										repositoryStars={item.repositoryStars}
+										lastCommit={item.lastCommit}
+										gitHubLink={item.gitHubLink}
+										fullName={item.fullName}
+									/>
+								)
+							})}
+						</div>
+						{(this.state.repositories.length >= 1) ? <ReactPaginate
+														pageCount={this.state.pageCount}
+														pageRangeDisplayed={9}
+														marginPagesDisplayed={1}
+														onPageChange={this.handleClick}
+													/> : null}
+					</>	
+				)} 
 			</div>
 			
 		)

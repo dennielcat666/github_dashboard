@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Link} from "react-router-dom";
 import RepositoryCardShort from '../RepositoryCardShort/RepositoryCardShort'
 import Button from '../Button/Button'
+import Oops from '../Oops/Oops'
 import {getRepositoriesList} from '../api'
 
 import styles from './RepositoriesList.module.css';
@@ -35,7 +36,7 @@ class RepositoriesList extends Component{
 	render(){
 		if(this.state.isError){
 			return (
-				<div>Упс {'>_<'}</div>
+				<Oops/>
 			)
 		}
 		return (

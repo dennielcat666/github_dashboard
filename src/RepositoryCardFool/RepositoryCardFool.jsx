@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Oops from '../Oops/Oops'
 import {getRepository} from '../api'
 
 import styles from './RepositoryCardFool.module.css'
@@ -22,7 +23,14 @@ class RepositoryCardFool extends Component{
 		const {owner, name} = this.props.match.params
 		getRepository(owner, name)
 			.then(res => {
-				console.log('res', res);
+				const sumLanguages = Object.values(res.languages).reduce((acc, item) => (acc + item), 0)
+				const interestLanguages = Object.entries(res.languages).reduce((acc, [key, value]) => ([
+					...acc,
+					{
+						name: key,
+						value: (value * 100 / sumLanguages).toFixed(2)
+					}
+				]), [])
 				this.setState({
 					repositoryName: res.name,
 					repositoryStars: res.stargazers_count,
@@ -30,7 +38,7 @@ class RepositoryCardFool extends Component{
 					avatarOwner: res.owner.avatar_url,
 					nickName: res.owner.login,
 					ownerLink: res.owner.html_url,
-					languages: res.languages,
+					languages: interestLanguages,
 					description: res.description,
 					contributors: res.contributors.slice(0, 10),
 				})
@@ -44,7 +52,7 @@ class RepositoryCardFool extends Component{
 	render(){
 		if(this.state.isError){
 			return (
-				<div>Упс {'>_<'}</div>
+				<Oops/>
 			)
 		}
 		return (
@@ -59,8 +67,8 @@ class RepositoryCardFool extends Component{
 				<div>
 					<p className={styles.headerList}>Используемые языки:</p>
 					<ul>
-						{Object.entries(this.state.languages).map(([key, value]) => {
-							return <li key={key}>{key}: {value}</li>
+						{this.state.languages.map(({name, value}) => {
+							return <li key={name}>{name}: {value}%</li>
 						})}
 					</ul>
 				</div>
