@@ -11,3 +11,39 @@
 	flex-wrap: wrap;
 	justify-content: space-around;
 }
+
+.containerPaginator {
+	display: flex;
+	justify-content: center;
+	color: #0366d6;
+}
+
+.breakPaginator {
+	background-color: #fff;
+	padding: 10px;
+	cursor: pointer;
+}
+
+.pagePaginator {
+	background-color: #fff;
+	margin: 0px;
+	padding: 10px;
+	cursor: pointer;
+}
+
+.activePaginator {
+	background-color: #0366d6;
+	color: #fff;
+}
+
+.previousPaginator {
+	padding: 10px;
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.nextPaginator {
+	padding: 10px;
+	background-color: #fff;
+	cursor: pointer;
+}

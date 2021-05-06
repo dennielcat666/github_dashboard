@@ -8,6 +8,7 @@ class RepositoryCardFool extends Component{
 
 	state = {
 		repositoryName: "",
+		gitHubLink: "",
 		repositoryStars: "",
 		lastCommit: "",
 		avatarOwner: "",
@@ -33,6 +34,7 @@ class RepositoryCardFool extends Component{
 				]), [])
 				this.setState({
 					repositoryName: res.name,
+					gitHubLink: res.html_url,
 					repositoryStars: res.stargazers_count,
 					lastCommit: res.updated_at,
 					avatarOwner: res.owner.avatar_url,
@@ -57,22 +59,22 @@ class RepositoryCardFool extends Component{
 		}
 		return (
 			<div className={styles.cardFool}>
-				<h2 className={styles.cardFoolName}>{this.state.repositoryName}</h2>
+				<h2 ><a className={styles.cardFoolName} target='_blank' href={this.state.gitHubLink}>{this.state.repositoryName}</a></h2>
 				<div>Stars: {this.state.repositoryStars}</div>
 				<div>{this.state.lastCommit}</div>
 				<div className={styles.cardOwner}>
 					<img src={this.state.avatarOwner} className={styles.avatarOwner} />
 					<a target='_blank' href={this.state.ownerLink} className={styles.ownerLink}>{this.state.nickName}</a>
 				</div>
-				<div>
+				<div className={styles.languagesBlok}>
 					<p className={styles.headerList}>Используемые языки:</p>
 					<ul>
 						{this.state.languages.map(({name, value}) => {
-							return <li key={name}>{name}: {value}%</li>
+							return <li key={name}><span className={styles.spanBold}>{name}:</span> {value}%</li>
 						})}
 					</ul>
 				</div>
-				<div>Описание: {this.state.description}</div>
+				<div><span className={styles.spanBold}>Описание:</span> {this.state.description}</div>
 				<div>
 					<p className={styles.headerList}>10 наиболее активных контрибьютеров: </p>
 					<ul className={styles.contributorsList}>

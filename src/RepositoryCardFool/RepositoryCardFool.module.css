@@ -1,7 +1,7 @@
 .cardFool {
 	background-color: #fff;
-	margin: 0 auto;
-	max-width: 700px;
+	margin: 20px auto;
+	max-width: 800px;
 	width: 100%;
 	padding: 20px 20px;
 }
@@ -9,6 +9,10 @@
 .cardFoolName {
 	font-size: 35px;
 	color: #0366d6;
+}
+
+.cardFoolName:hover {
+	text-decoration: underline;
 }
 
 .cardOwner {
@@ -26,7 +30,6 @@
 	display: inline-block;
 	margin: 0px 10px;
 	font-size: 25px;
-	text-decoration: none;
 	color: #000;
 }
 
@@ -34,34 +37,45 @@
 	text-decoration: underline;
 }
 
+.languagesBlok {
+	margin: 10px 0px;
+}
+
+.spanBold {
+	font-weight: bold;
+}
+
 .headerList {
 	color: #000;
 	font-size: 20px;
+	padding: 5px 0px;
 }
 
 .contributorsList {
 	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .contributorsListItem {
-	display: flex;
-	align-items: stretch;
-	list-style: none;
-	height: 60px;
-	padding: 10px 0px;
+	padding: 10px 5px;
+	margin: 0 5px;
+	text-align: center;
 }
 
 .avatarContributors {
+	display: block;
 	border-radius: 50%;
 	max-width: 50px;
 	width: 100%;
-}
-
-.avatarContributors:hover {
-	max-width: 60px;
-	width: 100%;
+	margin: 5px auto;
 }
 
 .avatarContributorsLink {
 	display: inline-block;
+	color: #0366d6;
+}
+
+.avatarContributorsLink:hover {
+	text-decoration: underline;
 }

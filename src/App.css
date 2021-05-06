@@ -8,3 +8,11 @@
 body {
 	background-color: #e5f0fb;
 }
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}

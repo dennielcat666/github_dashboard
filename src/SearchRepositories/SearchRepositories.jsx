@@ -70,12 +70,21 @@ class SearchRepositories extends Component{
 								)
 							})}
 						</div>
-						{(this.state.repositories.length >= 1) ? <ReactPaginate
+						<div>
+							{(this.state.repositories.length >= 1) ? <ReactPaginate
 														pageCount={this.state.pageCount}
 														pageRangeDisplayed={9}
 														marginPagesDisplayed={1}
 														onPageChange={this.handleClick}
+														containerClassName={styles.containerPaginator}
+														breakClassName={styles.breakPaginator}
+														pageClassName={styles.pagePaginator}
+														activeClassName={styles.activePaginator}
+														previousClassName={styles.previousPaginator}
+														nextClassName={styles.nextPaginator}
 													/> : null}
+						</div>
+						
 					</>	
 				)} 
 			</div>
