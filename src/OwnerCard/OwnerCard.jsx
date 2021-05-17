@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Oops from '../Oops/Oops'
 import {Link} from "react-router-dom";
 import {getUser} from '../api'
+import {checkValue} from './helpers'
 
 class OwnerCard extends Component {
 	state = {
@@ -20,11 +21,12 @@ class OwnerCard extends Component {
 		isError: false
 	}
 
-	componentDidMount(){
+	getUserData = () => {
 		const {login} = this.props.match.params
 		getUser(login)
 			.then(res => {
 				console.log('log res', res);
+				console.log('res res', res);
 				this.setState({
 					ownerName: res.name,
 					ownerLogin: res.login,
@@ -47,6 +49,17 @@ class OwnerCard extends Component {
 		
 	}
 
+	componentDidMount(){
+		this.getUserData()
+	}
+
+	componentDidUpdate(prevProps){
+		const {login} = this.props.match.params
+		if (prevProps.match.params.login !== login) {
+			this.getUserData()
+		}
+	}
+
 	render() {
 		console.log('login', this.props);
 		if(this.state.isError){
@@ -54,18 +67,23 @@ class OwnerCard extends Component {
 				<Oops/>
 			)
 		}
+
+		const blog = this.state.ownerBlog 
+			? <a a target='_blank' href={this.state.ownerBlog}>{this.state.ownerBlog}</a>
+			: 'Не указано'
+
 		return(
 			<div>
 				<div>
 					{/* Профиль */}
 					<div>
-						<h1><a target='_blank' href={this.state.ownerGitHubLink}>{this.state.ownerName}</a></h1>
-						<div>{this.state.ownerLogin}</div>
 						<img src={this.state.avatarOwner}/>
+						<h1>{this.state.ownerName}</h1>
+						<div><a target='_blank' href={this.state.ownerGitHubLink}>{this.state.ownerLogin}</a></div>
 						<div>Профиль создан: {this.state.createProfile}</div>
-						<div>Город: {this.state.ownerLocation}</div>
-						<div>Компания: {this.state.ownerCompany}</div>
-						<div>Блог: <a a target='_blank' href={this.state.ownerBlog}>{this.state.ownerBlog}</a></div>
+						<div>Город: {checkValue(this.state.ownerLocation)}</div>
+						<div>Компания: {checkValue(this.state.ownerCompany)}</div>
+						<div>Блог: {blog}</div>
 						<div>
 							<div>Followers: {this.state.counterFollowers}</div>
 							<div>Following: {this.state.counterFollowing}</div>
