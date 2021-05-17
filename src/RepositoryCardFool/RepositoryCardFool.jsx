@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Oops from '../Oops/Oops'
+import {Link} from "react-router-dom";
 import {getRepository} from '../api'
 
 import styles from './RepositoryCardFool.module.css'
@@ -81,10 +82,10 @@ class RepositoryCardFool extends Component{
 						{this.state.contributors.map(item => {
 							return (
 								<li key={item.id} className={styles.contributorsListItem}>
-									<a target='_blank' href={item.html_url} className={styles.avatarContributorsLink}>
+									<Link className={styles.avatarContributorsLink} to={`/${item.login}`}>
 										<img className={styles.avatarContributors} src={item.avatar_url} />
 										{item.login}
-									</a>
+									</Link>
 								</li>
 							)
 						})}

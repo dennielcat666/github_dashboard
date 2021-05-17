@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import HomePage from './HomePage/HomePage'
 import SearchRepositories from './SearchRepositories/SearchRepositories'
+import OwnerCard from './OwnerCard/OwnerCard'
 import RepositoryCardFool from './RepositoryCardFool/RepositoryCardFool'
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
@@ -12,6 +13,7 @@ export default class App extends Component {
 			<Router>
 				<Switch>
 					<Route path="/:owner/:name" component={RepositoryCardFool}/>
+					<Route path="/:login" component={OwnerCard}/>
 					<Route path="/search" component={SearchRepositories}/>
 					<Route path="/" component={HomePage} exact/>
 				</Switch>

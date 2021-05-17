@@ -28,3 +28,24 @@ export function searchRepository(q, page = 1, perPage = 10) {
 		.then(res => res.json())
 }
 
+const apiUsers = "https://api.github.com/users"
+
+export function getUser(login) {
+	return Promise.all([
+		fetch(`${apiUsers}/${login}`),
+		fetch(`${apiUsers}/${login}/followers`),
+		fetch(`${apiUsers}/${login}/repos`)
+	])
+	.then(res => Promise.all(res.map(item => item.json())))
+	.then(res => ({
+		...res[0],
+		followersApi: res[1],
+		reposApi: res[2]
+	}))
+}
+
+// export function getUser(login) {
+// 	return fetch(`${apiUsers}/${login}`)
+// 		.then(res => res.json())
+// }
+
