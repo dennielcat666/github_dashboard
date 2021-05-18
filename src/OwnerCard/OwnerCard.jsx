@@ -120,9 +120,8 @@ class OwnerCard extends Component {
 					<div className={styles.ownerFollowersBlockName}>FOLLOWERS</div>
 					<ul className={styles.ownerFollowersList}>
 						{this.state.followers.map(item => {
-							console.log('followers', item);
 							return(
-								<li key={item.id}>
+								<li className={styles.ownerFollowersItem} key={item.id}>
 									<Link to={`/${item.login}`}><img src={item.avatar_url} className={styles.avatarFollower}/><div className={styles.followerLogin}>{item.login}</div></Link>
 								</li>
 							)

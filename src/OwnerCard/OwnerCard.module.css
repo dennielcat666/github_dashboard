@@ -126,6 +126,11 @@
 	display: flex;
 	justify-content: space-around;
 	margin: 10px 0px 0px 0px;
+	flex-wrap: wrap;
+}
+
+.ownerFollowersItem {
+	margin: 10px 10px;
 }
 
 .avatarFollower {
