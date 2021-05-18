@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import {getUser} from '../api'
 import {checkValue} from './helpers'
 
+import styles from './OwnerCard.module.css';
+
 class OwnerCard extends Component {
 	state = {
 		ownerName: "", /* name */
@@ -11,6 +13,7 @@ class OwnerCard extends Component {
 		avatarOwner: "", /* avatar_url */
 		ownerGitHubLink: "", /* html_url */
 		ownerRepositories: [], /* repos_url */
+		ownerRepositoriesCount: "",
 		followers: [], /* followers_url */
 		ownerCompany: "", /* company */
 		ownerBlog: "", /* blog */
@@ -26,7 +29,6 @@ class OwnerCard extends Component {
 		getUser(login)
 			.then(res => {
 				console.log('log res', res);
-				console.log('res res', res);
 				this.setState({
 					ownerName: res.name,
 					ownerLogin: res.login,
@@ -40,6 +42,7 @@ class OwnerCard extends Component {
 					createProfile: res.created_at, 
 					followers: res.followersApi.slice(0, 10),
 					ownerRepositories: res.reposApi.slice(0, 10),
+					ownerRepositoriesCount: res.public_repos
 				})
 			})
 			.catch(error => {
@@ -69,33 +72,43 @@ class OwnerCard extends Component {
 		}
 
 		const blog = this.state.ownerBlog 
-			? <a a target='_blank' href={this.state.ownerBlog}>{this.state.ownerBlog}</a>
+			? <a a target='_blank' href={this.state.ownerBlog} className={styles.ownerInfoValueLink}>{this.state.ownerBlog}</a>
 			: 'Не указано'
 
+
+		const date = new Date(this.state.createProfile)
+		const createProfile = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
+
 		return(
-			<div>
-				<div>
+			<div className={styles.ownerCard}>
+				<div className={styles.ownerCardProfile}>
 					{/* Профиль */}
-					<div>
-						<img src={this.state.avatarOwner}/>
-						<h1>{this.state.ownerName}</h1>
-						<div><a target='_blank' href={this.state.ownerGitHubLink}>{this.state.ownerLogin}</a></div>
-						<div>Профиль создан: {this.state.createProfile}</div>
-						<div>Город: {checkValue(this.state.ownerLocation)}</div>
-						<div>Компания: {checkValue(this.state.ownerCompany)}</div>
-						<div>Блог: {blog}</div>
-						<div>
-							<div>Followers: {this.state.counterFollowers}</div>
-							<div>Following: {this.state.counterFollowing}</div>
-						</div>
+					<div className={styles.ownerProfile}>
+						<img src={this.state.avatarOwner} className={styles.avatarOwner}/>
+						<h1 className={styles.ownerName}>{checkValue(this.state.ownerName)}</h1>
+						<div><a target='_blank' href={this.state.ownerGitHubLink} className={styles.ownerLogin}>{this.state.ownerLogin}</a></div>
+						<div className={styles.ownerInfo}>Профиль создан: <span className={styles.ownerInfoValue}>{createProfile}</span></div>
+						<div className={styles.ownerInfo}>Город: <span className={styles.ownerInfoValue}>{checkValue(this.state.ownerLocation)}</span></div>
+						<div className={styles.ownerInfo}>Компания: <span className={styles.ownerInfoValue}>{checkValue(this.state.ownerCompany)}</span> </div>
+						<div className={styles.ownerInfo}>Блог: {blog}</div>
+						<div className={styles.ownerInfo}>Repositories: <a target='_blank' href={`https://github.com/${this.state.ownerLogin}?tab=repositories`} className={styles.ownerInfoValueLink}>{this.state.ownerRepositoriesCount}</a></div>
+						<div className={styles.ownerInfo}>Followers: <a target='_blank' href={`https://github.com/${this.state.ownerLogin}?tab=followers`} className={styles.ownerInfoValueLink}>{this.state.counterFollowers}</a></div>
+						<div className={styles.ownerInfo}>Following: <a target='_blank' href={`https://github.com/${this.state.ownerLogin}?tab=following`} className={styles.ownerInfoValueLink}>{this.state.counterFollowing}</a></div>
 					</div>
 					{/* репозиторий */}
-					<div>
-						<ul>
+					<div className={styles.ownerRepositoriesBlock}>
+						<ul className={styles.ownerRepositoriesList}>
 							{this.state.ownerRepositories.map(item => {
+								console.log("item", item);
 								return(
-									<li key={item.id}>
-										<Link to={item.full_name}>{item.name}</Link>
+									<li key={item.id} className={styles.ownerRepositoryItem}>
+										<Link to={item.full_name} className={styles.ownerRepositoryName}>{item.name}</Link>
+										<div className={styles.ownerRepositoryDescription}>{item.description}</div>
+										<div className={styles.ownerRepositoryInfo}>
+											<div className={styles.ownerRepositoryLanguage}><span className={styles.ownerInfo}>Language:</span> {item.language}</div>
+											<div className={styles.ownerRepositoryStars}><span className={styles.ownerInfo}>Stars:</span> {item.stargazers_count}</div>
+										</div>
+										
 									</li>
 								)
 							})}
@@ -103,12 +116,14 @@ class OwnerCard extends Component {
 					</div>
 				</div>
 				{/* фоловеры */}
-				<div>
-					<ul>
+				<div className={styles.ownerFollowersBlock}>
+					<div className={styles.ownerFollowersBlockName}>FOLLOWERS</div>
+					<ul className={styles.ownerFollowersList}>
 						{this.state.followers.map(item => {
+							console.log('followers', item);
 							return(
 								<li key={item.id}>
-									<Link to={`/${item.login}`}>{item.login}</Link>
+									<Link to={`/${item.login}`}><img src={item.avatar_url} className={styles.avatarFollower}/><div className={styles.followerLogin}>{item.login}</div></Link>
 								</li>
 							)
 						})}

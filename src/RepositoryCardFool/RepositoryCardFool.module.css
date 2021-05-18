@@ -4,6 +4,8 @@
 	max-width: 800px;
 	width: 100%;
 	padding: 20px 20px;
+	border: 1px solid #586069;
+    border-radius: 25px;
 }
 
 .cardFoolName {
@@ -15,6 +17,18 @@
 	text-decoration: underline;
 }
 
+.repositoryInfo {
+	color: #24292e;
+	font-size: 20px;
+	font-weight: 900;
+	padding: 5px 5px 5px 0px;
+}
+
+.repositoryInfoValue {
+	color: #586069;
+	font-size: 20px;
+}
+
 .cardOwner {
 	display: flex;
 	align-items: center;
@@ -24,13 +38,14 @@
 .avatarOwner {
 	max-width: 100px;
 	width: 100%;
+	border-radius: 50%;
 }
 
 .ownerLink {
 	display: inline-block;
 	margin: 0px 10px;
 	font-size: 25px;
-	color: #000;
+	color: #24292e;
 }
 
 .ownerLink:hover {
@@ -46,15 +61,16 @@
 }
 
 .headerList {
-	color: #000;
-	font-size: 20px;
+	font-size: 35px;
+	color: #24292e;
+	font-weight: 900;
 	padding: 5px 0px;
 }
 
 .contributorsList {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: space-between;
 }
 
 .contributorsListItem {
@@ -72,7 +88,6 @@
 }
 
 .avatarContributorsLink {
-	display: inline-block;
 	color: #0366d6;
 }
 

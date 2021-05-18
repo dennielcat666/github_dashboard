@@ -1,0 +1,147 @@
+.ownerCard {
+	background-color: #fff;
+	padding: 40px;
+    margin: 20px 55px;
+	border: 1px solid #586069;
+    border-radius: 25px;
+}
+
+.ownerCardProfile {
+	display: flex;
+}
+
+.ownerProfile {
+	max-width: 350px;
+    width: 100%;
+}
+
+.avatarOwner {
+	max-width: 250px;
+	width: 100%;
+	border-radius: 50%;
+}
+
+.ownerName {
+	font-size: 26px;
+	color: #24292e;
+	margin: 10px 0px 0px 0px;
+}
+
+.ownerLogin {
+	color: #586069;
+	font-size: 26px;
+}
+
+.ownerLogin:hover {
+	text-decoration: underline;
+}
+
+.ownerInfo {
+	color: #24292e;
+	font-size: 15px;
+	font-weight: 900;
+	padding: 5px 5px 5px 0px;
+}
+
+.ownerInfoValue {
+	color: #586069;
+	font-size: 15px;
+}
+
+.ownerInfoValueLink {
+	color: #0366d6;
+	font-size: 15px;
+}
+
+.ownerInfoValueLink:hover {
+	text-decoration: underline;
+}
+
+.ownerRepositoriesBlock {
+	display: flex;
+}
+
+.ownerRepositoriesList {
+	display: flex;
+    flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.ownerRepositoryItem {
+	display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+	max-width: 400px;
+	width: 100%;
+	border: 1px solid #586069;
+	border-radius: 20px;
+	padding: 15px;
+	margin: 10px 0px;
+}
+
+.ownerRepositoryName {
+	color: #0366d6;
+	font-size: 25px;
+	font-weight: 900;
+}
+
+.ownerRepositoryName:hover {
+	text-decoration: underline;
+}
+
+.ownerRepositoryDescription {
+	color: #586069;
+	font-size: 15px;
+	margin: 5px 0px 0px 0px;
+}
+
+.ownerRepositoryInfo {
+	display: flex;
+}
+
+.ownerRepositoryLanguage {
+	padding: 5px 10px 5px 0px;
+	color: #586069;
+}
+
+.ownerRepositoryStars {
+	padding: 5px 10px;
+	color: #586069;
+}
+
+.ownerFollowersBlock {
+	border-radius: 25px;
+    border: 1px solid #586069;
+    padding: 20px 20px;
+	margin: 10px 0px 0px 0px;
+}
+
+.ownerFollowersBlockName {
+	font-size: 35px;
+	color: #24292e;
+	font-weight: 900;
+}
+
+.ownerFollowersList {
+	display: flex;
+	justify-content: space-around;
+	margin: 10px 0px 0px 0px;
+}
+
+.avatarFollower {
+	display: block;
+	max-width: 50px;
+	width: 100%;
+	border-radius: 50%;
+	margin: 0 auto;
+}
+
+.followerLogin {
+	margin: 5px 0px 0px 0px;
+	color: #0366d6;
+	font-size: 15px;
+}
+
+.followerLogin:hover {
+	text-decoration: underline;
+}

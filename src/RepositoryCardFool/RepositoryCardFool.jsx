@@ -33,11 +33,12 @@ class RepositoryCardFool extends Component{
 						value: (value * 100 / sumLanguages).toFixed(2)
 					}
 				]), [])
+				console.log('aaaaaaaaaaa', res);
 				this.setState({
 					repositoryName: res.name,
 					gitHubLink: res.html_url,
 					repositoryStars: res.stargazers_count,
-					lastCommit: res.updated_at,
+					lastCommit: res.pushed_at,
 					avatarOwner: res.owner.avatar_url,
 					nickName: res.owner.login,
 					ownerLink: res.owner.html_url,
@@ -58,33 +59,37 @@ class RepositoryCardFool extends Component{
 				<Oops/>
 			)
 		}
+
+		const date = new Date(this.state.lastCommit)
+		const lastCommit = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
+
 		return (
 			<div className={styles.cardFool}>
 				<h2 ><a className={styles.cardFoolName} target='_blank' href={this.state.gitHubLink}>{this.state.repositoryName}</a></h2>
-				<div>Stars: {this.state.repositoryStars}</div>
-				<div>{this.state.lastCommit}</div>
 				<div className={styles.cardOwner}>
 					<img src={this.state.avatarOwner} className={styles.avatarOwner} />
 					<a target='_blank' href={this.state.ownerLink} className={styles.ownerLink}>{this.state.nickName}</a>
 				</div>
+				<div className={styles.repositoryInfo}>Stars: <span className={styles.repositoryInfoValue}>{this.state.repositoryStars}</span></div>
+				<div className={styles.repositoryInfo}>Update: <span className={styles.repositoryInfoValue}>{lastCommit}</span></div>
+				<div className={styles.repositoryInfo}>Описание: <span className={styles.repositoryInfoValue}>{this.state.description}</span></div>
 				<div className={styles.languagesBlok}>
 					<p className={styles.headerList}>Используемые языки:</p>
 					<ul>
 						{this.state.languages.map(({name, value}) => {
-							return <li key={name}><span className={styles.spanBold}>{name}:</span> {value}%</li>
+							return <li key={name} className={styles.repositoryInfo}>{name}: <span className={styles.repositoryInfoValue}>{value}%</span></li>
 						})}
 					</ul>
 				</div>
-				<div><span className={styles.spanBold}>Описание:</span> {this.state.description}</div>
 				<div>
-					<p className={styles.headerList}>10 наиболее активных контрибьютеров: </p>
+					<p className={styles.headerList}>Активные контрибьютеры: </p>
 					<ul className={styles.contributorsList}>
 						{this.state.contributors.map(item => {
 							return (
 								<li key={item.id} className={styles.contributorsListItem}>
 									<Link className={styles.avatarContributorsLink} to={`/${item.login}`}>
 										<img className={styles.avatarContributors} src={item.avatar_url} />
-										{item.login}
+										<div>{item.login}</div>
 									</Link>
 								</li>
 							)
